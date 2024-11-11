@@ -5,49 +5,49 @@
     android:id="@+id/MemoMessage"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context=".SubmitActivity">
 
     <EditText
-        android:id="@+id/editTextText"
+        android:id="@+id/editTextText3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:ems="10"
         android:inputType="text"
         android:text="Name"
-        tools:layout_editor_absoluteX="87dp"
-        tools:layout_editor_absoluteY="55dp" />
+        tools:layout_editor_absoluteX="108dp"
+        tools:layout_editor_absoluteY="41dp" />
 
     <EditText
-        android:id="@+id/editTextTextEmailAddress"
+        android:id="@+id/editTextTextEmailAddress2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:ems="10"
         android:inputType="textEmailAddress"
-        tools:layout_editor_absoluteX="86dp"
-        tools:layout_editor_absoluteY="143dp" />
+        tools:layout_editor_absoluteX="110dp"
+        tools:layout_editor_absoluteY="118dp" />
 
     <EditText
-        android:id="@+id/editTextTextPassword"
+        android:id="@+id/editTextTextPassword2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:ems="10"
         android:inputType="textPassword"
-        tools:layout_editor_absoluteX="84dp"
-        tools:layout_editor_absoluteY="229dp" />
+        tools:layout_editor_absoluteX="106dp"
+        tools:layout_editor_absoluteY="204dp" />
 
     <Button
-        android:id="@+id/buttonPlayerSubmitTransition"
+        android:id="@+id/buttonHomeBack"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="新規登録"
-        tools:layout_editor_absoluteX="61dp"
-        tools:layout_editor_absoluteY="336dp" />
+        android:text="戻る"
+        tools:layout_editor_absoluteX="74dp"
+        tools:layout_editor_absoluteY="280dp" />
 
     <Button
-        android:id="@+id/buttonPlayerLogin"
+        android:id="@+id/buttonPlayerNameSubmit"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="ログイン"
-        tools:layout_editor_absoluteX="222dp"
-        tools:layout_editor_absoluteY="332dp" />
+        android:text="登録"
+        tools:layout_editor_absoluteX="233dp"
+        tools:layout_editor_absoluteY="279dp" />
 </androidx.constraintlayout.widget.ConstraintLayout>
