@@ -67,8 +67,12 @@ public class SubmitActivity extends AppCompatActivity {
             // ここで新しいUserオブジェクトが作成され、登録処理などを行えるようになります
             // 例えば、新規ユーザー情報をローカルに保存する、または他の処理を行う
 
+
+
             // 次の画面に遷移する例（例えばメイン画面に遷移）
             Intent intent = new Intent(SubmitActivity.this, MainActivity.class);
+            // UserオブジェクトをIntentに渡す
+            intent.putExtra("user", newUser);
             startActivity(intent);
             finish();  // 現在のアクティビティを終了
         });

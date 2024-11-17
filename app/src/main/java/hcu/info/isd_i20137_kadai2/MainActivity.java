@@ -10,7 +10,7 @@ import androidx.core.view.WindowInsetsCompat;
 import android.content.Intent;
 import android.view.View;
 import android.widget.Button;
-
+import android.widget.TextView;
 
 
 
@@ -38,5 +38,17 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+
+
+        // IntentからUserオブジェクトを取得
+        Intent intent = getIntent();
+        User user = intent.getParcelableExtra("user");
+
+        // 取得したUser情報を表示
+        if (user != null) {
+            TextView textView = findViewById(R.id.textWelcome);
+            textView.setText("Welcome, " + user.getUsername() + "!");
+        }
     }
 }

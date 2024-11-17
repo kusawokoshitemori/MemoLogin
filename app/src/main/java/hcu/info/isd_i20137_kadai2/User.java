@@ -1,6 +1,9 @@
 package hcu.info.isd_i20137_kadai2;
 
-public class User {
+import android.os.Parcel;
+import android.os.Parcelable;
+
+public class User implements Parcelable {
     private String username;
     private String email;
     private String password;
@@ -45,7 +48,37 @@ public class User {
 
     // パスワードの検証
     public static boolean validatePassword(String password) {
-        // 6文字以上、数字と文字を含む
         return password.length() >= 6 && password.matches(".*[a-zA-Z].*") && password.matches(".*[0-9].*");
     }
+
+    // Parcelable の実装部分
+    protected User(Parcel in) {
+        username = in.readString();
+        email = in.readString();
+        password = in.readString();
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(username);
+        dest.writeString(email);
+        dest.writeString(password);
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    public static final Creator<User> CREATOR = new Creator<User>() {
+        @Override
+        public User createFromParcel(Parcel in) {
+            return new User(in);
+        }
+
+        @Override
+        public User[] newArray(int size) {
+            return new User[size];
+        }
+    };
 }
