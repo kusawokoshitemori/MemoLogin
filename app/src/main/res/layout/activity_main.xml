@@ -8,46 +8,56 @@
     tools:context=".MainActivity">
 
     <EditText
-        android:id="@+id/editTextText"
+        android:id="@+id/enterPlayerName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="87dp"
+        android:layout_marginTop="55dp"
         android:ems="10"
         android:inputType="text"
         android:text="Name"
-        tools:layout_editor_absoluteX="87dp"
-        tools:layout_editor_absoluteY="55dp" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
-        android:id="@+id/editTextTextEmailAddress"
+        android:id="@+id/enterPlayerEmail"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="86dp"
+        android:layout_marginTop="43dp"
         android:ems="10"
         android:inputType="textEmailAddress"
-        tools:layout_editor_absoluteX="86dp"
-        tools:layout_editor_absoluteY="143dp" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/enterPlayerName" />
 
     <EditText
-        android:id="@+id/editTextTextPassword"
+        android:id="@+id/enterPlayerPassword"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="84dp"
+        android:layout_marginTop="41dp"
         android:ems="10"
         android:inputType="textPassword"
-        tools:layout_editor_absoluteX="84dp"
-        tools:layout_editor_absoluteY="229dp" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/enterPlayerEmail" />
 
     <Button
         android:id="@+id/buttonPlayerSubmitTransition"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="61dp"
+        android:layout_marginTop="62dp"
         android:text="新規登録"
-        tools:layout_editor_absoluteX="61dp"
-        tools:layout_editor_absoluteY="336dp" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/enterPlayerPassword" />
 
     <Button
         android:id="@+id/buttonPlayerLogin"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="56dp"
+        android:layout_marginTop="58dp"
         android:text="ログイン"
-        tools:layout_editor_absoluteX="222dp"
-        tools:layout_editor_absoluteY="332dp" />
+        app:layout_constraintStart_toEndOf="@+id/buttonPlayerSubmitTransition"
+        app:layout_constraintTop_toBottomOf="@+id/enterPlayerPassword" />
 </androidx.constraintlayout.widget.ConstraintLayout>
