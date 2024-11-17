@@ -52,7 +52,7 @@
         app:layout_constraintTop_toBottomOf="@+id/inputPlayerPassword" />
 
     <Button
-        android:id="@+id/buttonPlayerNameSubmit"
+        android:id="@+id/buttonPlayerSubmit"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="71dp"

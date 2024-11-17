@@ -10,6 +10,9 @@ import androidx.core.view.WindowInsetsCompat;
 import android.content.Intent;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
+import android.widget.EditText;
+
 
 
 public class SubmitActivity extends AppCompatActivity {
@@ -28,6 +31,12 @@ public class SubmitActivity extends AppCompatActivity {
         // ボタン取得
         Button buttonHomeBack = findViewById(R.id.buttonHomeBack);
 
+        EditText inputPlayerName = (EditText) findViewById(R.id.inputPlayerName);
+        EditText inputPlayerEmail = (EditText) findViewById(R.id.inputPlayerEmail);
+        EditText inputPlayerPassword = (EditText) findViewById(R.id.inputPlayerPassword);
+        Button buttonPlayerSubmit = findViewById(R.id.buttonPlayerSubmit);
+
+
         // ボタンを押すと MainActivity に遷移する機能
         buttonHomeBack.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -37,6 +46,31 @@ public class SubmitActivity extends AppCompatActivity {
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(intent);
             }
+        });
+
+        // ボタンがクリックされたときの処理
+        buttonPlayerSubmit.setOnClickListener(view -> {
+            // ユーザーが入力した情報を取得
+            String username = inputPlayerName.getText().toString();
+            String email = inputPlayerEmail.getText().toString();
+            String password = inputPlayerPassword.getText().toString();
+
+            // 入力が空でないかチェック
+            if (username.isEmpty() || email.isEmpty() || password.isEmpty()) {
+                Toast.makeText(SubmitActivity.this, "全てのフィールドを入力してください", Toast.LENGTH_SHORT).show();
+                return;
+            }
+
+            // Userオブジェクトを作成し、情報をセット
+            User newUser = new User(username, email, password);
+
+            // ここで新しいUserオブジェクトが作成され、登録処理などを行えるようになります
+            // 例えば、新規ユーザー情報をローカルに保存する、または他の処理を行う
+
+            // 次の画面に遷移する例（例えばメイン画面に遷移）
+            Intent intent = new Intent(SubmitActivity.this, MainActivity.class);
+            startActivity(intent);
+            finish();  // 現在のアクティビティを終了
         });
     }
 }
