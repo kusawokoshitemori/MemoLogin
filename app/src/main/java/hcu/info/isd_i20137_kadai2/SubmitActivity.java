@@ -7,12 +7,12 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+
 import android.content.Intent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 import android.widget.EditText;
-
 
 
 public class SubmitActivity extends AppCompatActivity {
@@ -31,9 +31,9 @@ public class SubmitActivity extends AppCompatActivity {
         // ボタン取得
         Button buttonHomeBack = findViewById(R.id.buttonHomeBack);
 
-        EditText inputPlayerName = (EditText) findViewById(R.id.inputPlayerName);
-        EditText inputPlayerEmail = (EditText) findViewById(R.id.inputPlayerEmail);
-        EditText inputPlayerPassword = (EditText) findViewById(R.id.inputPlayerPassword);
+        EditText inputPlayerName = findViewById(R.id.inputPlayerName);
+        EditText inputPlayerEmail = findViewById(R.id.inputPlayerEmail);
+        EditText inputPlayerPassword = findViewById(R.id.inputPlayerPassword);
         Button buttonPlayerSubmit = findViewById(R.id.buttonPlayerSubmit);
 
 
@@ -61,20 +61,15 @@ public class SubmitActivity extends AppCompatActivity {
                 return;
             }
 
-            // Userオブジェクトを作成し、情報をセット
+            // 新しいユーザーを作成し、UserManagerに追加
             User newUser = new User(username, email, password);
+            UserManager.getInstance().addUser(newUser);
 
-            // ここで新しいUserオブジェクトが作成され、登録処理などを行えるようになります
-            // 例えば、新規ユーザー情報をローカルに保存する、または他の処理を行う
-
-
-
-            // 次の画面に遷移する例（例えばメイン画面に遷移）
+            // 次のアクティビティに遷移
             Intent intent = new Intent(SubmitActivity.this, MainActivity.class);
-            // UserオブジェクトをIntentに渡す
-            intent.putExtra("user", newUser);
+            intent.putExtra("email", email); // ユーザーのメールアドレスを渡す
             startActivity(intent);
-            finish();  // 現在のアクティビティを終了
+            finish();
         });
     }
 }

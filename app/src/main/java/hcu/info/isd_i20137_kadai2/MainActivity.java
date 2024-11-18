@@ -10,6 +10,7 @@ import androidx.core.view.WindowInsetsCompat;
 import android.content.Intent;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 
 
@@ -39,16 +40,25 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        // 色々取得
+        EditText enterPlayerName = findViewById(R.id.enterPlayerName);
+        EditText enterPlayerEmail = findViewById(R.id.enterPlayerEmail);
+        EditText enterPlayerPassword = findViewById(R.id.enterPlayerPassword);
+        Button buttonPlayerSubmit = findViewById(R.id.buttonPlayerSubmit);
 
 
-        // IntentからUserオブジェクトを取得
-        Intent intent = getIntent();
-        User user = intent.getParcelableExtra("user");
+        // Intent からメールアドレスを取得
+        String email = getIntent().getStringExtra("email");
 
-        // 取得したUser情報を表示
+        // UserManager からユーザー情報を取得
+        User user = UserManager.getInstance().getUserByEmail(email);
+
+        // 取得したユーザー情報を表示
+        TextView textView = findViewById(R.id.textWelcome);
         if (user != null) {
-            TextView textView = findViewById(R.id.textWelcome);
             textView.setText("Welcome, " + user.getUsername() + "!");
+        } else {
+            textView.setText("ユーザー情報が見つかりませんでした。");
         }
     }
 }

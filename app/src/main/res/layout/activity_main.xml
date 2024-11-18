@@ -62,10 +62,12 @@
         app:layout_constraintTop_toBottomOf="@+id/enterPlayerPassword" />
 
     <TextView
-        android:id="@+id/textView2"
+        android:id="@+id/textWelcome"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="80dp"
+        android:layout_marginTop="50dp"
         android:text="TextView"
-        tools:layout_editor_absoluteX="80dp"
-        tools:layout_editor_absoluteY="434dp" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/buttonPlayerSubmitTransition" />
 </androidx.constraintlayout.widget.ConstraintLayout>
