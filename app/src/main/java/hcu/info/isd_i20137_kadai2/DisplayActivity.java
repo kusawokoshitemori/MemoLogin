@@ -37,10 +37,22 @@ public class DisplayActivity extends AppCompatActivity {
 
         Button buttonLogout = findViewById(R.id.buttonLogout);
 
-        // ボタンクリック時に ログアウト する
+        // ボタンクリック時にログアウトする
         buttonLogout.setOnClickListener(view -> {
+            // SharedPreferences を取得
+            SharedPreferences prefs = getSharedPreferences("UserPrefs", MODE_PRIVATE);
+            SharedPreferences.Editor editor = prefs.edit();
+
+            // メールアドレスを空文字に設定（ログアウト時）
+            editor.putString("email", "");
+            editor.apply();
+
+            // MainActivity に遷移
             Intent intent = new Intent(DisplayActivity.this, MainActivity.class);
             startActivity(intent);
+
+            // 現在のアクティビティを終了
+            finish();
         });
 
         emailTextView = findViewById(R.id.emailTextView);

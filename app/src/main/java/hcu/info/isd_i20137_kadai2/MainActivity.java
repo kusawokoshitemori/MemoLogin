@@ -19,7 +19,7 @@ import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
 
-    private String email = "example@example.com";
+    private String email = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
