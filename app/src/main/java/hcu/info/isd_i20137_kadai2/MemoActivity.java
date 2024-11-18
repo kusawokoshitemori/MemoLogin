@@ -9,6 +9,8 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 import android.content.Intent;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Toast;
 
 public class MemoActivity extends AppCompatActivity {
 
@@ -30,6 +32,25 @@ public class MemoActivity extends AppCompatActivity {
         buttonDisplayBack.setOnClickListener(view -> {
             Intent intent = new Intent(MemoActivity.this, DisplayActivity.class);
             startActivity(intent);
+        });
+
+
+
+        EditText memoContent = findViewById(R.id.memoContent);
+        Button buttonMemoSubmit = findViewById(R.id.buttonMemoSubmit);
+
+        // ボタンがクリックされたときの処理
+        buttonMemoSubmit.setOnClickListener(view -> {
+            // ユーザーが入力した情報を取得
+            String username = memoContent.getText().toString();
+
+            // 入力が空でないかチェック
+            if (username.isEmpty()) {
+                Toast.makeText(MemoActivity.this, "メモを入力して下さい", Toast.LENGTH_SHORT).show();
+                return;
+            }
+
+            // ここにjsonファイル送る
         });
     }
 }
