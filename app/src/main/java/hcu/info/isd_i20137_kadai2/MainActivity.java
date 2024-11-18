@@ -1,5 +1,6 @@
 package hcu.info.isd_i20137_kadai2;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.activity.EdgeToEdge;
@@ -7,6 +8,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+
 import android.content.Intent;
 import android.view.View;
 import android.widget.Button;
@@ -16,6 +18,8 @@ import android.widget.Toast;
 
 
 public class MainActivity extends AppCompatActivity {
+
+    private String email = "example@example.com";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,9 +76,14 @@ public class MainActivity extends AppCompatActivity {
                 return;
             }
 
-            // ログイン成功、次のアクティビティに遷移
+            // SharedPreferences にメールアドレスを保存
+            SharedPreferences prefs = getSharedPreferences("UserPrefs", MODE_PRIVATE);
+            SharedPreferences.Editor editor = prefs.edit();
+            editor.putString("email", email);
+            editor.apply();
+
+            // DisplayActivity へ遷移
             Intent intent = new Intent(MainActivity.this, DisplayActivity.class);
-            intent.putExtra("email", email); // ユーザーのメールアドレスを渡す
             startActivity(intent);
             finish();
         });

@@ -1,5 +1,6 @@
 package hcu.info.isd_i20137_kadai2;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.activity.EdgeToEdge;
@@ -10,9 +11,11 @@ import androidx.core.view.WindowInsetsCompat;
 import android.content.Intent;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 public class MemoActivity extends AppCompatActivity {
+    private String email;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,6 +31,7 @@ public class MemoActivity extends AppCompatActivity {
         // ボタンの取得
         Button buttonDisplayBack = findViewById(R.id.buttonDisplayBack);
 
+
         // ボタンクリック時に MemoActivity に遷移
         buttonDisplayBack.setOnClickListener(view -> {
             Intent intent = new Intent(MemoActivity.this, DisplayActivity.class);
@@ -38,6 +42,8 @@ public class MemoActivity extends AppCompatActivity {
 
         EditText memoContent = findViewById(R.id.memoContent);
         Button buttonMemoSubmit = findViewById(R.id.buttonMemoSubmit);
+        TextView emailTextView = findViewById(R.id.emailTextView);
+
 
         // ボタンがクリックされたときの処理
         buttonMemoSubmit.setOnClickListener(view -> {
@@ -50,7 +56,15 @@ public class MemoActivity extends AppCompatActivity {
                 return;
             }
 
-            // ここにjsonファイル送る
+
+            // SharedPreferences からメールアドレスを取得
+            SharedPreferences prefs = getSharedPreferences("UserPrefs", MODE_PRIVATE);
+            String email = prefs.getString("email", null);
+
+            // メールアドレスを表示
+            if (email != null) {
+                emailTextView.setText(email);
+            }
         });
     }
 }
