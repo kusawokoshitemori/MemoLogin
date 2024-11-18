@@ -15,9 +15,12 @@ public class UserManager {
         return instance;
     }
 
-    // コンストラクタ（プライベート）
+    // コンストラクタ
     private UserManager() {
         userList = new ArrayList<>();
+
+        // 初期データ
+        addUser(new User("test", "test@gmail.com", "testtest"));
     }
 
     // ユーザーを追加

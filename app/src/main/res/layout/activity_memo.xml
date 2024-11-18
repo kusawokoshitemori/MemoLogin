@@ -11,17 +11,31 @@
         android:id="@+id/editTextText2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="82dp"
+        android:layout_marginTop="68dp"
         android:ems="10"
         android:inputType="text"
         android:text="Memo"
-        tools:layout_editor_absoluteX="82dp"
-        tools:layout_editor_absoluteY="68dp" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/buttonMemoSubmit"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="60dp"
+        android:layout_marginTop="164dp"
         android:text="送信"
-        tools:layout_editor_absoluteX="253dp"
-        tools:layout_editor_absoluteY="159dp" />
+        app:layout_constraintStart_toEndOf="@+id/buttonDisplayBack"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/buttonDisplayBack"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="73dp"
+        android:layout_marginTop="52dp"
+        android:text="戻る"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editTextText2" />
 </androidx.constraintlayout.widget.ConstraintLayout>
