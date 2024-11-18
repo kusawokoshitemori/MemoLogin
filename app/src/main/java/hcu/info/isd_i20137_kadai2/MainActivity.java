@@ -12,7 +12,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
-
+import android.widget.Toast;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -41,10 +41,43 @@ public class MainActivity extends AppCompatActivity {
         });
 
         // 色々取得
-        EditText enterPlayerName = findViewById(R.id.enterPlayerName);
         EditText enterPlayerEmail = findViewById(R.id.enterPlayerEmail);
         EditText enterPlayerPassword = findViewById(R.id.enterPlayerPassword);
-        Button buttonPlayerSubmit = findViewById(R.id.buttonPlayerSubmit);
+        Button buttonPlayerLogin = findViewById(R.id.buttonPlayerLogin);
+
+        // ボタンがクリックされたときの処理
+        buttonPlayerLogin.setOnClickListener(view -> {
+            // ユーザーが入力した情報を取得
+            String email = enterPlayerEmail.getText().toString();
+            String password = enterPlayerPassword.getText().toString();
+
+            // 入力が空でないかチェック
+            if (email.isEmpty() || password.isEmpty()) {
+                Toast.makeText(MainActivity.this, "全てのフィールドを入力してください", Toast.LENGTH_SHORT).show();
+                return;
+            }
+
+            // ユーザー情報のチェック
+            UserManager userManager = UserManager.getInstance();
+            User user = userManager.getUserByEmail(email);
+
+            if (user == null) {
+                Toast.makeText(MainActivity.this, "ユーザーが見つかりません。", Toast.LENGTH_SHORT).show();
+                return;
+            }
+
+            // パスワードの照合
+            if (!user.getPassword().equals(password)) {
+                Toast.makeText(MainActivity.this, "パスワードが正しくありません。", Toast.LENGTH_SHORT).show();
+                return;
+            }
+
+            // ログイン成功、次のアクティビティに遷移
+            Intent intent = new Intent(MainActivity.this, DisplayActivity.class);
+            intent.putExtra("email", email); // ユーザーのメールアドレスを渡す
+            startActivity(intent);
+            finish();
+        });
 
 
         // Intent からメールアドレスを取得
