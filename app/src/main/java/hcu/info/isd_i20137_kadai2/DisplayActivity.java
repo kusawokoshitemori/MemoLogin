@@ -4,6 +4,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.activity.EdgeToEdge;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
@@ -11,6 +12,12 @@ import androidx.core.view.WindowInsetsCompat;
 import android.content.Intent;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import java.io.BufferedReader;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStreamReader;
 
 public class DisplayActivity extends AppCompatActivity {
     private String email;
@@ -65,5 +72,57 @@ public class DisplayActivity extends AppCompatActivity {
         if (email != null) {
             emailTextView.setText(email);
         }
+
+        // ボタンを取得
+        Button buttonMemoDisplay = findViewById(R.id.buttonMemoDisplay);
+
+        // ボタンを押したときの動作
+        buttonMemoDisplay.setOnClickListener(v -> {
+            // ファイル名
+            String fileName = "memo.txt";
+            StringBuilder stringBuilder = new StringBuilder();
+
+            try (FileInputStream fis = openFileInput(fileName);
+                 BufferedReader reader = new BufferedReader(new InputStreamReader(fis))) {
+                String line;
+                String currentMemoEmail = null;
+                StringBuilder currentMemo = new StringBuilder();
+
+                // ファイルの内容を一行ずつ読み込む
+                while ((line = reader.readLine()) != null) {
+                    if (line.startsWith("Email: ")) {
+                        // 新しいメールアドレスが始まったら、現在のメモをチェック
+                        if (currentMemoEmail != null && currentMemoEmail.equals(email)) {
+                            stringBuilder.append(currentMemo.toString());
+                        }
+                        // 新しいメールアドレスに切り替え
+                        currentMemoEmail = line.substring(7); // "Email: " を取り除いた部分を取得
+                        currentMemo.setLength(0); // メモをリセット
+                    } else {
+                        currentMemo.append(line).append("\n");
+                    }
+                }
+                // 最後のメモをチェック
+                if (currentMemoEmail != null && currentMemoEmail.equals(email)) {
+                    stringBuilder.append(currentMemo.toString());
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+                Toast.makeText(this, "ファイルの読み込みに失敗しました", Toast.LENGTH_SHORT).show();
+                return;
+            }
+
+            // 読み込んだ内容を表示
+            String memoContent = stringBuilder.toString();
+            if (!memoContent.isEmpty()) {
+                new AlertDialog.Builder(this)
+                        .setTitle("保存されたメモ")
+                        .setMessage(memoContent)
+                        .setPositiveButton("OK", null)
+                        .show();
+            } else {
+                Toast.makeText(this, "保存されたメモがありません", Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 }

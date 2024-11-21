@@ -14,8 +14,28 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.io.FileOutputStream;
+import java.io.IOException;
+
 public class MemoActivity extends AppCompatActivity {
     private String email;
+
+    // ファイルを保存
+    private void saveToFile(String email, String memo) {
+        // 保存する内容を作成
+        String data = "Email: " + email + "\nMemo: " + memo + "\n\n";
+
+        // ファイル名を指定
+        String fileName = "memo.txt";
+
+        try (FileOutputStream fos = openFileOutput(fileName, MODE_APPEND)) {
+            // データを書き込む
+            fos.write(data.getBytes());
+        } catch (IOException e) {
+            e.printStackTrace();
+            Toast.makeText(this, "ファイル保存に失敗しました", Toast.LENGTH_SHORT).show();
+        }
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,13 +65,17 @@ public class MemoActivity extends AppCompatActivity {
         TextView emailTextView = findViewById(R.id.emailTextView);
 
 
+
+
+
+
         // ボタンがクリックされたときの処理
         buttonMemoSubmit.setOnClickListener(view -> {
             // ユーザーが入力した情報を取得
-            String username = memoContent.getText().toString();
+            String memo = memoContent.getText().toString();
 
             // 入力が空でないかチェック
-            if (username.isEmpty()) {
+            if (memo.isEmpty()) {
                 Toast.makeText(MemoActivity.this, "メモを入力して下さい", Toast.LENGTH_SHORT).show();
                 return;
             }
@@ -61,10 +85,21 @@ public class MemoActivity extends AppCompatActivity {
             SharedPreferences prefs = getSharedPreferences("UserPrefs", MODE_PRIVATE);
             String email = prefs.getString("email", null);
 
+
+
             // メールアドレスを表示
             if (email != null) {
                 emailTextView.setText(email);
             }
+
+            // メモとメールアドレスをファイルに保存
+            saveToFile(email, memo);
+
+            // 保存完了のメッセージ
+            Toast.makeText(MemoActivity.this, "メモが保存されました", Toast.LENGTH_SHORT).show();
         });
+
+
+
     }
 }
