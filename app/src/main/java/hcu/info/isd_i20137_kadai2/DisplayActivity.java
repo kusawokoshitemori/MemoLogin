@@ -88,15 +88,14 @@ public class DisplayActivity extends AppCompatActivity {
                 String currentMemoEmail = null;
                 StringBuilder currentMemo = new StringBuilder();
 
-                // ファイルの内容を一行ずつ読み込む
+                // ファイルを一行ずつ
                 while ((line = reader.readLine()) != null) {
                     if (line.startsWith("Email: ")) {
-                        // 新しいメールアドレスが始まったら、現在のメモをチェック
                         if (currentMemoEmail != null && currentMemoEmail.equals(email)) {
                             stringBuilder.append(currentMemo.toString());
                         }
                         // 新しいメールアドレスに切り替え
-                        currentMemoEmail = line.substring(7); // "Email: " を取り除いた部分を取得
+                        currentMemoEmail = line.substring(7); // "Email: " を除いた部分の取得
                         currentMemo.setLength(0); // メモをリセット
                     } else {
                         currentMemo.append(line).append("\n");
@@ -112,7 +111,7 @@ public class DisplayActivity extends AppCompatActivity {
                 return;
             }
 
-            // 読み込んだ内容を表示
+            // 呼び出した内容の表示
             String memoContent = stringBuilder.toString();
             if (!memoContent.isEmpty()) {
                 new AlertDialog.Builder(this)
