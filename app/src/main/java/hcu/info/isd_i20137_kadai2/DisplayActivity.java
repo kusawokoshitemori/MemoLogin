@@ -18,6 +18,7 @@ import java.io.BufferedReader;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.List;
 
 public class DisplayActivity extends AppCompatActivity {
     private String email;
@@ -68,10 +69,22 @@ public class DisplayActivity extends AppCompatActivity {
         SharedPreferences prefs = getSharedPreferences("UserPrefs", MODE_PRIVATE);
         String email = prefs.getString("email", null);
 
-        // メールアドレスを表示
-        if (email != null) {
-            emailTextView.setText(email);
+        // UserManager を使ってユーザーを検索
+        User user = UserManager.getInstance().getUserByEmail(email);
+
+// ユーザー情報をまとめる
+        StringBuilder userInfo = new StringBuilder();
+
+        if (user != null) {
+            // ユーザーが見つかった場合
+            userInfo.append("ようこそ ").append(user.getName()).append("さん");
+        } else {
+            // ユーザーが見つからなかった場合
+            userInfo.append("ユーザーが見つかりませんでした。ログアウトしてください");
         }
+
+// ユーザー情報を TextView に表示
+        emailTextView.setText(userInfo.toString());
 
         // ボタンを取得
         Button buttonMemoDisplay = findViewById(R.id.buttonMemoDisplay);

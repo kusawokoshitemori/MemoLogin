@@ -16,10 +16,9 @@ public class User implements Parcelable {
     }
 
     // GetterとSetter
-    public String getUsername() {
+    public String getName() {
         return username;
     }
-
 
     public String getEmail() {
         return email;

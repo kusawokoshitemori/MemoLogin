@@ -87,20 +87,5 @@ public class MainActivity extends AppCompatActivity {
             startActivity(intent);
             finish();
         });
-
-
-        // Intent からメールアドレスを取得
-        String email = getIntent().getStringExtra("email");
-
-        // UserManager からユーザー情報を取得
-        User user = UserManager.getInstance().getUserByEmail(email);
-
-        // 取得したユーザー情報を表示
-        TextView textView = findViewById(R.id.textWelcome);
-        if (user != null) {
-            textView.setText("Welcome, " + user.getUsername() + "!");
-        } else {
-            textView.setText("ユーザー情報が見つかりませんでした。");
-        }
     }
 }

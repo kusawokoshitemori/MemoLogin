@@ -18,7 +18,6 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 
 public class MemoActivity extends AppCompatActivity {
-    private String email;
 
     // ファイルを保存
     private void saveToFile(String email, String memo) {
@@ -37,6 +36,8 @@ public class MemoActivity extends AppCompatActivity {
         }
     }
 
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -47,6 +48,8 @@ public class MemoActivity extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+
+
 
         // ボタンの取得
         Button buttonDisplayBack = findViewById(R.id.buttonDisplayBack);
@@ -64,7 +67,26 @@ public class MemoActivity extends AppCompatActivity {
         Button buttonMemoSubmit = findViewById(R.id.buttonMemoSubmit);
         TextView emailTextView = findViewById(R.id.emailTextView);
 
+        // SharedPreferences からメールアドレスを取得
+        SharedPreferences prefs = getSharedPreferences("UserPrefs", MODE_PRIVATE);
+        String email = prefs.getString("email", null);
 
+        // UserManager を使ってユーザーを検索
+        User user = UserManager.getInstance().getUserByEmail(email);
+
+// ユーザー情報をまとめる
+        StringBuilder userInfo = new StringBuilder();
+
+        if (user != null) {
+            // ユーザーが見つかった場合
+            userInfo.append("ようこそ ").append(user.getName()).append("さん");
+        } else {
+            // ユーザーが見つからなかった場合
+            userInfo.append("ユーザーが見つかりませんでした。ログアウトしてください");
+        }
+
+// ユーザー情報を TextView に表示
+        emailTextView.setText(userInfo.toString());
 
 
 
@@ -81,16 +103,9 @@ public class MemoActivity extends AppCompatActivity {
             }
 
 
-            // SharedPreferences からメールアドレスを取得
-            SharedPreferences prefs = getSharedPreferences("UserPrefs", MODE_PRIVATE);
-            String email = prefs.getString("email", null);
 
 
 
-            // メールアドレスを表示
-            if (email != null) {
-                emailTextView.setText(email);
-            }
 
             // メモとメールアドレスをファイルに保存
             saveToFile(email, memo);

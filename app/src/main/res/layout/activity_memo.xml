@@ -14,9 +14,8 @@
         android:layout_marginStart="82dp"
         android:layout_marginTop="68dp"
         android:ems="10"
-        android:inputType="text"
-        android:text="Memo"
         android:hint="メモを入力"
+        android:inputType="text"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
