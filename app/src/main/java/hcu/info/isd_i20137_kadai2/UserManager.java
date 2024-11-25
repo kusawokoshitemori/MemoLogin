@@ -20,7 +20,7 @@ public class UserManager {
         userList = new ArrayList<>();
 
         // 初期データ
-        addUser(new User("test", "test@gmail.com", "testtest"));
+        addUser(new User("test", "test@gmail.com", "test123"));
     }
 
     // ユーザーを追加
@@ -36,10 +36,5 @@ public class UserManager {
             }
         }
         return null;
-    }
-
-    // 全ユーザーの取得
-    public List<User> getAllUsers() {
-        return userList;
     }
 }

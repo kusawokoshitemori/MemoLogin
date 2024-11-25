@@ -1,5 +1,7 @@
 package hcu.info.isd_i20137_kadai2;
 
+import static hcu.info.isd_i20137_kadai2.User.validateEmail;
+
 import android.os.Bundle;
 
 import androidx.activity.EdgeToEdge;
@@ -58,6 +60,18 @@ public class SubmitActivity extends AppCompatActivity {
             // 入力が空でないかチェック
             if (username.isEmpty() || email.isEmpty() || password.isEmpty()) {
                 Toast.makeText(SubmitActivity.this, "全てのフィールドを入力してください", Toast.LENGTH_SHORT).show();
+                return;
+            }
+            if (!validateEmail(email)) {
+                Toast.makeText(SubmitActivity.this, "メールアドレスの形式が正しくありません", Toast.LENGTH_SHORT).show();
+                return;
+            }
+            if (!User.validatePassword(password)) {
+                Toast.makeText(SubmitActivity.this, "パスワードは6文字以上で英数字を含めてください", Toast.LENGTH_SHORT).show();
+                return;
+            }
+            if(UserManager.getInstance().getUserByEmail(email) != null){
+                Toast.makeText(SubmitActivity.this, "既に登録されているメールアドレスです", Toast.LENGTH_SHORT).show();
                 return;
             }
 
