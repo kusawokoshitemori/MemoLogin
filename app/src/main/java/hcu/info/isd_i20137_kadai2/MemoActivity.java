@@ -112,6 +112,7 @@ public class MemoActivity extends AppCompatActivity {
 
             // 保存完了のメッセージ
             Toast.makeText(MemoActivity.this, "メモが保存されました", Toast.LENGTH_SHORT).show();
+            memoContent.setText("");
         });
 
 
